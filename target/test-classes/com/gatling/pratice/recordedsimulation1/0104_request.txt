@@ -1,0 +1,3 @@
+en=page_view&ep.anonymize_ip=true
+en=Clarity&_ee=1&ep.anonymize_ip=true&ep.eventCategory=Clarity&ep.eventAction=pdnuct&ep.nonInteraction=true&ep.finsights=https%3A%2F%2Fclarity.microsoft.com%2Fga%2F79a7uxjato%2F1xacjpc%2Fpdnuct&_et=78
+en=Clarity&_ee=1&ep.anonymize_ip=true&ep.eventCategory=Clarity&ep.eventAction=pdnuct&ep.nonInteraction=true&ep.claritydimension=https%3A%2F%2Fclarity.microsoft.com%2Fga%2F79a7uxjato%2F1xacjpc%2Fpdnuct&_et=23
