@@ -1,0 +1,18 @@
+trigger:
+  branches:
+    include:
+      - main  # Change this to your main branch name
+
+pool:
+  vmImage: 'ubuntu-latest'  # Use the appropriate image based on your requirements
+
+steps:
+- checkout: self  # This checks out your repository using the default settings
+
+- script: |
+    mvn clean install
+  displayName: 'Build'
+
+- script: |
+    mvn gatling:test
+  displayName: 'Run Karate-Gatling'
