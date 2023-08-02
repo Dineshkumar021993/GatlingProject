@@ -14,5 +14,5 @@ steps:
   displayName: 'Build'
 
 - script: |
-    mvn gatling:test
+    mvn clean test-compile gatling:test  -D"gatling.simulationClass=api.apiperformancetest"
   displayName: 'Run Karate-Gatling'
