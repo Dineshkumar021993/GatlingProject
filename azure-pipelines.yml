@@ -1,7 +1,7 @@
 trigger: 
   branches:
     include:
-      - main  # Change this to your main branch name
+      - master  # Change this to your main branch name
 
 pool:
   vmImage: 'ubuntu-latest'  # Use the appropriate image based on your requirements
