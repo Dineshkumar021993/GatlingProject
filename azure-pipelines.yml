@@ -1,4 +1,4 @@
-trigger:
+trigger: 
   branches:
     include:
       - main  # Change this to your main branch name
