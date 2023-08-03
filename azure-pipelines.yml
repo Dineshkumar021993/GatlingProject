@@ -1,18 +1,40 @@
-trigger: 
+trigger:
   branches:
     include:
-      - main  # Change this to your main branch name
+      - main  # Replace "main" with the branch you want to trigger the pipeline
 
 pool:
-  vmImage: 'ubuntu-latest'  # Use the appropriate image based on your requirements
+  vmImage: 'ubuntu-latest'
 
 steps:
-- checkout: self  # This checks out your repository using the default settings
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'  # Replace with the correct path to your pom.xml file
+    goals: 'clean test-compile gatling:test'
+    options: '-Dgatling.simulationClass=api.apiperformancetest'
+  displayName: 'Run Gatling Performance Test'
 
-- script: |
-    mvn clean install
-  displayName: 'Build'
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'  # Replace with the correct path to your pom.xml file
+    goals: 'clean install package'
+  displayName: 'Build and Package Maven Project'
 
-- script: |
-    mvn clean test-compile gatling:test  -D"gatling.simulationClass=api.apiperformancetest"
-  displayName: 'Run Karate-Gatling'
+- script: docker build -t $(imageName):$(Build.BuildId) .
+  displayName: 'Docker Build'
+
+- script: docker login -u dineshkumar021993 -p dinesh@#4 
+  displayName: 'Docker Login'
+
+- script: docker push $(imageName):$(Build.BuildId)
+  displayName: 'Docker Push'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '.'
+    ArtifactName: 'dockerImage'
+    publishLocation: 'Container'
+
+variables:
+  imageName: 'dineshkumar021993/gatlingnew'
+
